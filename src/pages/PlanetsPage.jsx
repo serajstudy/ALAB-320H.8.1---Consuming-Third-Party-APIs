@@ -1,6 +1,7 @@
 import {useState,useEffect} from "react";
 import axios from "axios";
 import Person from "../components/Person";
+// import apiService from "../utilities/apiService.mjs";
 
 
 export default function PlanetsPage() {
@@ -20,7 +21,20 @@ export default function PlanetsPage() {
       }
       
     }
-  })
+
+    getData();
+    
+  },[]);
+
+  let loading =()=>{
+    return <h1>Loading </h1>;
+  };
+
+
+  let loaded = ()=>data.map((per, i)=>{
+    return <Person key = {i} {...per} />;
+
+  });
 
 
 
@@ -28,5 +42,5 @@ export default function PlanetsPage() {
 
 
 
-  return <h1>Planets Page</h1>;
+  return data ? <div className="container"> {loaded}</div>:loading();
 }
